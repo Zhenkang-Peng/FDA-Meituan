@@ -286,7 +286,7 @@ def decentralized_centralised_ols(X_hats, y_hats,h,b):
 
     return model_newsvendor, model_prior, saa_decision
 
-#for FDA (linear + linear) cross-validation
+#for FlexDA (linear + linear) cross-validation
 def decentralized_shared_ols_newsvendor(X_hats, y_hats,h,b):
     K = len(X_hats)
     feature_num = X_hats[0].shape[1]
@@ -348,7 +348,7 @@ def random_forest(X_hats,y_hats,saa_decision,h,b):
 
 
 
-#select suitable alpha for  FDA (linear + linear)
+#select suitable alpha for  FlexDA (linear + linear)
 def cross_validation(X_hats, y_hats,saa_decision,h,b,cv = 3):
     K = len(X_hats)
     feature_num = X_hats[0].shape[1]
@@ -414,7 +414,7 @@ def cross_validation(X_hats, y_hats,saa_decision,h,b,cv = 3):
     return alpha_list[np.argmin(cost)]
 
 
-#select suitable alpha for  FDA (linear + random forest)
+#select suitable alpha for  FlexDA (linear + random forest)
 def shrunken_non_linear(X_hats,y_hats,saa_decision,max_depth,h,b,cv = 3,alphas = [0.01*i for i in range(101)]):
     K = len(X_hats)
     f = X_hats[0].shape[1]
@@ -493,7 +493,7 @@ def shrunken_non_linear(X_hats,y_hats,saa_decision,max_depth,h,b,cv = 3,alphas =
     return alpha_best
     # #splict the all data
 
-#select suitable alpha for  FDA (saa + linear)
+#select suitable alpha for  FlexDA (saa + linear)
 def cv_saa_ols(X_hats,y_hats,saa_decision,h,b,cv = 5, alphas = [0.01*i for i in range(101)]):
     K = len(X_hats)
     f = X_hats[0].shape[1]
@@ -670,7 +670,7 @@ def shrunken_saa(y_PAB,saa_decision,h,b):
     
     return decision
 
-#create the decision and FDA Linear
+#create the decision and FlexDA Linear
 def main(X_hats,y_hats, Xs,ys,X_PAB,y_PAB,h,b,data_size,index):
     Xs = np.array(Xs)
     ys = np.array(ys)
