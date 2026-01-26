@@ -386,7 +386,7 @@ def DAC(ols_models,saa_decision,upper_ratio,lower_ratio,X_hats, y_hats,cluster_n
         
     return DAC
 
-#FDA （linear + random forest）
+#FlexDA （linear + random forest）
 def shrunken_non_linear(X_hats,y_hats,saa_decision,max_depth,cv = 5,alphas = [0.05*i for i in range(20)]):
     K = len(X_hats)
     f = X_hats[0].shape[1]
@@ -458,7 +458,7 @@ def shrunken_non_linear(X_hats,y_hats,saa_decision,max_depth,cv = 5,alphas = [0.
     return alpha_best
     # #splict the all data
 
-#FDA (SAA + linear)
+#FlexDA (SAA + linear)
 def cv_saa_ols(X_hats,y_hats,saa_decision,cv = 5, alphas = [0.05*i for i in range(20)]):
     K = len(X_hats)
     f = X_hats[0].shape[1]
@@ -529,7 +529,7 @@ def cv_saa_ols(X_hats,y_hats,saa_decision,cv = 5, alphas = [0.05*i for i in rang
 
 
 
-#create the decision and FDA Linear
+#create the decision and FlexDA Linear
 def main(X_hats,y_hats, Xs,ys,X_PAB,y_PAB):
     K = len(X_hats)
     beta_0_hat = 0
@@ -554,7 +554,7 @@ def main(X_hats,y_hats, Xs,ys,X_PAB,y_PAB):
 
     s4 = datetime.datetime.now()
     
-    #FDA tree
+    #FlexDA tree
     alpha_non_linear = shrunken_non_linear(X_hats,y_hats,saa_decision,max_depth)
 
     s5 = datetime.datetime.now()
@@ -579,13 +579,13 @@ def main(X_hats,y_hats, Xs,ys,X_PAB,y_PAB):
 
     s9 = datetime.datetime.now()
 
-    #FDA alpha for SAA + linear
+    #FlexDA alpha for SAA + linear
     alpha_saa = cv_saa_ols(X_hats,y_hats,saa_decision)
 
     #rf with product index
     rf_index =  random_forest_with_index(X_hats,y_hats,saa_decision)
 
-    # Calculate the numerator and denominator for \hat{\alpha} of linear FDA
+    # Calculate the numerator and denominator for \hat{\alpha} of linear FlexDA
     numerator = 0
     denominator = 0
     
